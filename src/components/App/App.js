@@ -17,13 +17,21 @@ const business = {
   reviewCount: 90
 }
 
+const businesses = [
+  business,
+  business,
+  business,
+  business,
+  business,
+  business
+]
 
 function App() {
   return (
     <div class="App">
       <h1>Yelp 2.0</h1>
         <SearchBar/>
-        <BusinessList/>
+        <BusinessList businesses={businesses}/>
       </div>
   );
 }
