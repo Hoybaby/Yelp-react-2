@@ -1,30 +1,20 @@
 import React from 'react';
 import './SearchBar.css';
 
-// need to create the ways for the search bar to search the api
-let sortByOptions = {
+const sortByOptions = {
     'Best Match': 'best_match',
     'Highest Rated': 'rating',
     'Most Reviewed': 'review_count'
-}
+};
 
 class SearchBar extends React.Component {
-    constructor(props) {
-        super(props)
 
-        this.state = {
-            term: '',
-            location: '',
-            sortBy: 'best_match'
-        }
-    }
-
-    // this function is to dynamically create list items needed to display the sort options. Should iterate through the keys and values 
+      // this function is to dynamically create list items needed to display the sort options. Should iterate through the keys and values 
     renderSortByOptions() {
         return Object.keys(sortByOptions).map(sortByOption => {
-            let sortByOptionValue = sortByOptions[sortByOption]
-            return <li key={sortByOptionValue}>{sortByOption}</li>
-        })
+            let sortByOptionValue = sortByOptions[sortByOption];
+            return <li key={sortByOptionValue}>{sortByOption}</li>;
+        });
     }
 
     render() {
@@ -32,7 +22,7 @@ class SearchBar extends React.Component {
             <div className="SearchBar">
                 <div className="SearchBar-sort-options">
                     <ul>
-                        {this.renderSortByOptions}
+                        {this.renderSortByOptions()}
                     </ul>
                 </div>
                 <div className="SearchBar-fields">
@@ -40,12 +30,11 @@ class SearchBar extends React.Component {
                     <input placeholder="Where?" />
                 </div>
                 <div className="SearchBar-submit">
-                    <a href='#'>Let's Go</a>
+                    <a>Let's Go</a>
                 </div>
             </div>
-        )
+        );
     }
-
 }
 
 export default SearchBar;
