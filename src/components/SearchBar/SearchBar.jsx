@@ -9,6 +9,15 @@ let sortByOptions = {
 }
 
 class SearchBar extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            term: '',
+            location: '',
+            sortBy: 'best_match'
+        }
+    }
 
     // this function is to dynamically create list items needed to display the sort options. Should iterate through the keys and values 
     renderSortByOptions() {
