@@ -1,11 +1,6 @@
 import React from 'react';
 import './SearchBar.css';
 
-const sortByOptions = {
-    'Best Match': 'best_match',
-    'Highest Rated': 'rating',
-    'Most Reviewed': 'review_count'
-};
 
 class SearchBar extends React.Component {
 
@@ -16,6 +11,24 @@ class SearchBar extends React.Component {
             term: '',
             location: '',
             sortBy: 'best_match'
+        }
+        // currently user doesnt know what choice they are selected so this will help it.
+
+        this.sortByOptions = {
+            'Best Match': 'best_match',
+            'Highest Rated': 'rating',
+            'Most Reviewed': 'review_count'
+        }
+
+        
+
+    }
+
+    getSortByClass(sortByOption) {
+        if( sortByOption == this.state.sortBy) {
+            return 'active'
+        } else {
+            return ''
         }
     }
 
