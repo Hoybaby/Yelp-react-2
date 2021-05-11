@@ -27,14 +27,20 @@ const businesses = [
   business
 ]
 
-function App() {
-  return (
+class  App extends React.Component {
+
+  searchYelp(term,location, sortBy) {
+    console.log()
+  }
+  render() {
+    return (
     <div class="App">
       <h1>Yelp 2.0</h1>
         <SearchBar/>
         <BusinessList businesses={businesses}/>
       </div>
-  );
+    );
+  }
 }
-
+  
 export default App;
