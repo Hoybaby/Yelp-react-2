@@ -2,6 +2,13 @@ import React from 'react';
 import './SearchBar.css';
 
 
+const sortByOptions = {
+    'Best Match': 'best_match',
+    'Highest Rated': 'rating',
+    'Most Reviewed': 'review_count'
+}
+
+
 class SearchBar extends React.Component {
 
     constructor(props) {
@@ -14,29 +21,35 @@ class SearchBar extends React.Component {
         }
         // currently user doesnt know what choice they are selected so this will help it.
 
-        this.sortByOptions = {
-            'Best Match': 'best_match',
-            'Highest Rated': 'rating',
-            'Most Reviewed': 'review_count'
-        }
+        // this.sortByOptions = {
+        //     'Best Match': 'best_match',
+        //     'Highest Rated': 'rating',
+        //     'Most Reviewed': 'review_count'
+        // }
 
-        
+
 
     }
 
     getSortByClass(sortByOption) {
-        if( sortByOption == this.state.sortBy) {
+        if (sortByOption == this.state.sortBy) {
             return 'active'
         } else {
             return ''
         }
     }
 
-      // this function is to dynamically create list items needed to display the sort options. Should iterate through the keys and values 
+    handleSortByChange(sortByOption) {
+        this.setState({
+            sortBy: sortByOption
+        })
+    }
+
+    // this function is to dynamically create list items needed to display the sort options. Should iterate through the keys and values 
     renderSortByOptions() {
         return Object.keys(sortByOptions).map(sortByOption => {
             let sortByOptionValue = sortByOptions[sortByOption];
-            return <li key={sortByOptionValue}>{sortByOption}</li>;
+            return <li key={sortByOptionValue} onClick={this.handleSortByChange.bind(this, sortByOptionValue)} className={this.getSortByClass(sortByOptionValue)} >{sortByOption}</li>;
         });
     }
 
