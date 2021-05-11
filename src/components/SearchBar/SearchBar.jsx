@@ -45,6 +45,18 @@ class SearchBar extends React.Component {
         })
     }
 
+    handleTermChange(e){
+        this.setState({
+            term: e.target.value
+        })
+    }
+
+    handleLocationChange(e) {
+        this.setState({
+            location: e.target.value
+        })
+    }
+
     // this function is to dynamically create list items needed to display the sort options. Should iterate through the keys and values 
     renderSortByOptions() {
         return Object.keys(sortByOptions).map(sortByOption => {
