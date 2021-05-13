@@ -1,16 +1,7 @@
 import React from 'react';
 import './SearchBar.css';
 
-
-const sortByOptions = {
-    'Best Match': 'best_match',
-    'Highest Rated': 'rating',
-    'Most Reviewed': 'review_count'
-}
-
-
 class SearchBar extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -19,50 +10,58 @@ class SearchBar extends React.Component {
             location: '',
             sortBy: 'best_match'
         };
-        // currently user doesnt know what choice they are selected so this will help it.
-
-        // this.sortByOptions = {
-        //     'Best Match': 'best_match',
-        //     'Highest Rated': 'rating',
-        //     'Most Reviewed': 'review_count'
-        // }
 
         this.handleTermChange = this.handleTermChange.bind(this);
         this.handleLocationChange = this.handleLocationChange.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
 
+
+        this.sortByOptions = {
+            'Best Match': 'best_match',
+            'Highest Rated': 'rating',
+            'Most Reviewed': 'review_count'
+        };
     }
 
     getSortByClass(sortByOption) {
-        if (sortByOption == this.state.sortBy) {
-            return 'active'
-        } else {
-            return ''
+        if (this.state.sortBy === sortByOption) {
+            return 'active';
         }
+        return '';
     }
 
     handleSortByChange(sortByOption) {
-        this.setState({
-            sortBy: sortByOption
-        })
+        this.setState({ sortBy: 
+            sortByOption 
+        });
     }
 
-    handleTermChange(e){
-        this.setState({
-            term: e.target.value
-        })
+    handleTermChange(event) {
+        this.setState({ 
+            term: event.target.value 
+        });
     }
 
-    handleLocationChange(e) {
-        this.setState({
-            location: e.target.value
-        })
+    handleLocationChange(event) {
+        this.setState({ 
+            location: event.target.value 
+        });
     }
 
-    // this function is to dynamically create list items needed to display the sort options. Should iterate through the keys and values 
+    handleSearch(e) {
+        this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
+
+        e.preventDefault();
+    }
+
     renderSortByOptions() {
-        return Object.keys(sortByOptions).map(sortByOption => {
-            let sortByOptionValue = sortByOptions[sortByOption];
-            return <li key={sortByOptionValue} onClick={this.handleSortByChange.bind(this, sortByOptionValue)} className={this.getSortByClass(sortByOptionValue)} >{sortByOption}</li>;
+        return Object.keys(this.sortByOptions).map(sortByOption => {
+            let sortByOptionValue = this.sortByOptions[sortByOption];
+            return (<li className={this.getSortByClass(sortByOptionValue)}
+                key={sortByOptionValue}
+                onClick={this.handleSortByChange.bind(this, sortByOptionValue)}>
+                {sortByOption}
+            </li>);
         });
     }
 
@@ -79,7 +78,7 @@ class SearchBar extends React.Component {
                     <input placeholder="Where?" onChange={this.handleLocationChange} />
                 </div>
                 <div className="SearchBar-submit">
-                    <a>Let's Go</a>
+                    <a onClick={this.handleSearch}>Let's Go</a>
                 </div>
             </div>
         );
